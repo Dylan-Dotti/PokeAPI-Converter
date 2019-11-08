@@ -21,7 +21,8 @@ if __name__ == '__main__':
         ms.insert_many(evolution_data, 'pokeapi', 'evolution-chains')
         print('Upload complete.')
 
-
+    phs.get_all_pokemon_urls()
+    phs.get_all_pokemon_urls()
     for i in range(1, len(sys.argv)):
         command = sys.argv[i]
         if command == 'pokemon':
