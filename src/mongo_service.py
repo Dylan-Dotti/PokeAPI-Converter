@@ -1,9 +1,7 @@
 import pymongo
 
 
-__client = pymongo.MongoClient('mongodb+srv://Dylan_D:<password>'
-                               '@cluster0-ddcyt.gcp.mongodb.net/'
-                               'test?retryWrites=true&w=majority')
+__client = pymongo.MongoClient('mongodb+srv://Dylan_D:<password>@cluster0-ddcyt.gcp.mongodb.net/test?retryWrites=true&w=majority')
 try:
     __client.list_database_names()
     print('Database connection successful')

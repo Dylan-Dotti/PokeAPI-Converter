@@ -8,12 +8,14 @@ if __name__ == '__main__':
 
 
     def convert_pokemon_data(pokemon_service, species_service):
+        print('Dropping existing pokemon data')
+        ms.drop_collection('pokemon')
         print('Downloading pokemon data...')
         pokemon_data = pokemon_service.get_all()
-        # merge evolution_chain data from pokemon species
+        # species_data = species_service.get_all()
         print('Download complete. Uploading to database...')
         ms.insert_many(pokemon_data, 'pokemon')
-        print('Upload complete.')
+        print('Transfer complete.')
 
 
     def convert_evolution_data(evo_service):
