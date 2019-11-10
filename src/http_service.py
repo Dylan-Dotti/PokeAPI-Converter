@@ -9,11 +9,8 @@ class HttpService(gs.GetterService):
 
     def __get_resource(self, url):
         if url not in self.__cache:
-            #print('Fetching resource: ' + url)
             data = requests.get(url=url)
             self.__cache[url] = data.json()
-        #else:
-            #print('Fetching resource from cache: ' + url)
         return self.__cache[url]
 
     def __get_resources(self, urls):

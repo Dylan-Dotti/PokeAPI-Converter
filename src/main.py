@@ -6,24 +6,32 @@ if __name__ == '__main__':
     import evolution_chain_http_service as es
     import mongo_service as ms
 
-
     def convert_pokemon_data(pokemon_service, species_service):
         print('Dropping existing pokemon data')
         ms.drop_collection('pokemon')
         print('Downloading pokemon data...')
         pokemon_data = pokemon_service.get_all()
-        # species_data = species_service.get_all()
         print('Download complete. Uploading to database...')
         ms.insert_many(pokemon_data, 'pokemon')
         print('Transfer complete.')
 
+    def convert_species_data(species_service):
+        print('Dropping existing species data')
+        ms.drop_collection('pokemon-species')
+        print('Downloading species data...')
+        species_data = species_service.get_all()
+        print('Download complete. Uploading to database...')
+        ms.insert_many(species_data, 'pokemon-species')
+        print('Transfer complete.')
 
     def convert_evolution_data(evo_service):
+        print('Dropping existing evolution data')
+        ms.drop_collection('evolution-chain')
         print('Downloading evolution chain data...')
-        evolution_data = evo_service.get_all_evolution_chains()
+        evo_data = evo_service.get_all()
         print('Download complete. Uploading to database...')
-        ms.insert_many(evolution_data, 'evolution-chains')
-        print('Upload complete.')
+        ms.insert_many(evo_data, 'pokemon-species')
+        print('Transfer complete.')
 
 
     pokemon_service = ps.PokemonHttpService()
@@ -34,5 +42,7 @@ if __name__ == '__main__':
         command = sys.argv[i]
         if command == 'pokemon':
             convert_pokemon_data(pokemon_service, pokemon_species_service)
-        elif command == 'evolution_chains':
+        elif command == 'pokemon_species':
+            convert_species_data(pokemon_species_service)
+        elif command == 'evolution_chain':
             convert_evolution_data(evolution_service)
